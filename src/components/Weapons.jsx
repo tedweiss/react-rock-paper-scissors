@@ -10,7 +10,7 @@ const Weapons = ({ setResult }) => {
     const enemyChoice = findEnemysChoice(Math.random())
     const winner = compare(name, enemyChoice)
     setResult(winner)
-    dispatch({ type: 'increment', side: winner })
+    dispatch({ type: 'decrement', side: winner })
   }
   return (
     <>

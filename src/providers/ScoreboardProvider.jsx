@@ -16,9 +16,13 @@ const countReducer = (state, action) => {
     }
     case 'decrement': {
       if (action.side.winner === 'hero') {
-        return { hero: state.hero - 1, enemy: state.enemy }
+        const enemyScore = state.enemy - 1
+        const battleWinner = enemyScore === 0 ? 'hero' : ''
+        return { enemy: enemyScore, hero: state.hero, battleWinner }
       } else if (action.side.winner === 'enemy') {
-        return { enemy: state.enemy - 1, hero: state.hero }
+        const heroScore = state.hero - 1
+        const battleWinner = heroScore === 0 ? 'enemy' : ''
+        return { hero: heroScore, enemy: state.enemy, battleWinner }
       } else if (action.side.winner === 'tie') {
         return { enemy: state.enemy, hero: state.hero }
       }
@@ -30,7 +34,12 @@ const countReducer = (state, action) => {
 }
 
 const ScoreboardProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(countReducer, { enemy: 0, hero: 0 })
+  const heroStartingScore = 5
+  const enemyStartingScore = 5
+  const [state, dispatch] = useReducer(countReducer, {
+    enemy: heroStartingScore,
+    hero: enemyStartingScore
+  })
   return (
     <ScoreboardStateContext.Provider value={state}>
       <ScoreboardDispatchContext.Provider value={dispatch}>
