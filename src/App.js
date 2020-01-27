@@ -1,14 +1,21 @@
 import React from 'react'
 import './App.css'
-import Battlefield from './components/Battlefield'
+
+import { EnemyProvider } from './providers/EnemyProvider'
 import { ScoreboardProvider } from './providers/ScoreboardProvider'
+
+import Battlefield from './components/Battlefield'
+import EnemiesDisplay from './components/EnemiesDisplay'
 
 const App = () => {
   return (
     <div className='App' data-testid='App'>
-      <ScoreboardProvider>
-        <Battlefield />
-      </ScoreboardProvider>
+      <EnemyProvider>
+        <ScoreboardProvider>
+          <EnemiesDisplay />
+          <Battlefield />
+        </ScoreboardProvider>
+      </EnemyProvider>
     </div>
   )
 }

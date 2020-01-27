@@ -52,7 +52,7 @@ const ScoreboardProvider = ({ children }) => {
 const useCountState = () => {
   const context = useContext(ScoreboardStateContext)
   if (context === undefined) {
-    throw new Error('useCountState must be used within a CountProvider')
+    throw new Error('useCountState must be used within a ScoreboardProvider')
   }
   return context
 }
@@ -60,7 +60,7 @@ const useCountState = () => {
 const useCountDispatch = () => {
   const context = useContext(ScoreboardDispatchContext)
   if (context === undefined) {
-    throw new Error('useCountDispatch must be used within a CountProvider')
+    throw new Error('useCountDispatch must be used within a ScoreboardProvider')
   }
   return context
 }

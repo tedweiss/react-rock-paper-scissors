@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+
+import { useCountState } from '../providers/ScoreboardProvider'
+
 import Weapons from './Weapons'
 import ScoreDisplay from './ScoreDisplay'
-import { useCountState } from '../providers/ScoreboardProvider'
 import BattleWinnerDisplay from './BattleWinnerDisplay'
+import EnemyDisplay from './EnemyDisplay'
 
 const Battlefield = () => {
   const [result, setResult] = useState()
@@ -15,6 +18,7 @@ const Battlefield = () => {
   return (
     <>
       <ScoreDisplay />
+      <EnemyDisplay />
       <Weapons setResult={setResult} />
       {result && (
         <div>

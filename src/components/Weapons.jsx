@@ -1,7 +1,9 @@
 import React from 'react'
-import Weapon from './Weapon'
-import { compare, findEnemysChoice } from '../utils/utils'
+
 import { useCountDispatch } from '../providers/ScoreboardProvider'
+import { compare, findEnemysChoice } from '../utils/utils'
+
+import Weapon from './Weapon'
 
 const Weapons = ({ setResult }) => {
   const weaponChoices = ['rock', 'paper', 'scissors']
