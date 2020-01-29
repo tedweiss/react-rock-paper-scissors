@@ -8,7 +8,7 @@ import Battlefield from './Battlefield'
 const Pages = () => {
   const { enemy } = useEnemyState()
 
-  if (enemy) {
+  if (enemy && enemy.id) {
     return <Battlefield />
   }
   return (

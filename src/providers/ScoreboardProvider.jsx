@@ -5,10 +5,8 @@ const ScoreboardDispatchContext = createContext()
 
 const countReducer = (state, action) => {
   switch (action.type) {
-    case 'select': {
-      if (action.side === 'enemy') {
-        return { hero: state.hero, enemy: action.enemy }
-      }
+    case 'reset': {
+      return { hero: 5, enemy: 5 }
     }
     case 'increment': {
       if (action.side.winner === 'hero') {
