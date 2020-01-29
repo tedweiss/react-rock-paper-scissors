@@ -1,4 +1,4 @@
 export const enemies = [
-  { id: 1, name: 'Enemy One' },
-  { id: 2, name: 'Enemy Two' }
+  { id: 1, name: 'Enemy One', health: 5 },
+  { id: 2, name: 'Enemy Two', health: 6 }
 ]
