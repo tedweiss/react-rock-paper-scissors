@@ -19,12 +19,18 @@ const StyledResultItem = styled(StyledResultWinner)`
   font-weight: bold;
   color: darkorange;
 `
+const StyledStart = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+`
 
 const Battlefield = () => {
   const [result, setResult] = useState()
+  const [start, setStart] = useState('')
   const { battleWinner } = useCountState()
 
-  if (battleWinner) {
+  if (result && battleWinner) {
     return <BattleWinnerDisplay battleWinner={battleWinner} />
   }
 
@@ -32,7 +38,8 @@ const Battlefield = () => {
     <>
       <EnemyDisplay />
       <ScoreDisplay />
-      <Weapons setResult={setResult} />
+      <Weapons setResult={setResult} setStart={setStart} />
+      <StyledStart>{start}</StyledStart>
       {result && (
         <StyledResult>
           <StyledResultWinner>{result.winner}</StyledResultWinner>{' '}

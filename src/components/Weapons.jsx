@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useCountDispatch } from '../providers/ScoreboardProvider'
-import { compare, findEnemysChoice } from '../utils/utils'
+import { compare, displayBattleStart, findEnemysChoice } from '../utils/utils'
 
 import Weapon from './Weapon'
 
@@ -12,14 +12,14 @@ const StyledWeapons = styled.div`
   max-width: 500px;
 `
 
-const Weapons = ({ setResult }) => {
+const Weapons = ({ setResult, setStart }) => {
   const weaponChoices = ['rock', 'paper', 'scissors']
+  const startingWords = ['rock', 'paper', 'scissors', 'shoot']
   const dispatch = useCountDispatch()
   const displayResult = name => {
     const enemyChoice = findEnemysChoice(Math.random())
     const winner = compare(name, enemyChoice)
-    setResult(winner)
-    dispatch({ type: 'decrement', side: winner })
+    displayBattleStart(startingWords, winner, setResult, setStart, dispatch)
   }
   return (
     <StyledWeapons>

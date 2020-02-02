@@ -43,3 +43,28 @@ export const compare = (choice1, choice2) => {
   }
   return { item, winner }
 }
+
+export const displayBattleStart = (
+  startingWords,
+  winner,
+  setResult,
+  setStart,
+  dispatch
+) => {
+  setResult(null)
+  startingWords.map((word, index) => {
+    if (startingWords.indexOf(word) <= startingWords.length - 1) {
+      setTimeout(() => {
+        setStart(word + ' ')
+      }, 750 * index)
+    }
+    if (startingWords.indexOf(word) === startingWords.length - 1) {
+      setTimeout(() => {
+        setStart('')
+        setResult(winner)
+        dispatch({ type: 'decrement', side: winner })
+      }, 750 * index + 750)
+    }
+    return true
+  })
+}
