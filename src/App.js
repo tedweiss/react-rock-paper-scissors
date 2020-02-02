@@ -1,17 +1,25 @@
 import React from 'react'
-import './App.css'
+import styled from 'styled-components'
 
 import { EnemyProvider } from './providers/EnemyProvider'
 import { ScoreboardProvider } from './providers/ScoreboardProvider'
 
 import Pages from './components/Pages'
 
+const StyledApp = styled.div`
+  text-align: center;
+  max-width: 800px;
+  margin: 30px auto 0;
+`
+
 const App = () => {
   return (
     <div className='App' data-testid='App'>
       <EnemyProvider>
         <ScoreboardProvider>
-          <Pages />
+          <StyledApp>
+            <Pages />
+          </StyledApp>
         </ScoreboardProvider>
       </EnemyProvider>
     </div>

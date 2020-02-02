@@ -9,6 +9,7 @@ const countReducer = (state, action) => {
       if (action.side === 'enemy') {
         return { hero: state.hero, enemy: action.enemy.health }
       }
+      break
     }
     case 'reset': {
       return { hero: 5, enemy: 5 }
@@ -21,6 +22,7 @@ const countReducer = (state, action) => {
       } else if (action.side.winner === 'tie') {
         return { enemy: state.enemy, hero: state.hero }
       }
+      break
     }
     case 'decrement': {
       if (action.side.winner === 'hero') {
@@ -34,6 +36,7 @@ const countReducer = (state, action) => {
       } else if (action.side.winner === 'tie') {
         return { enemy: state.enemy, hero: state.hero }
       }
+      break
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)

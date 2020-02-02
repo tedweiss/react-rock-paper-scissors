@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 
 import { useCountState } from '../providers/ScoreboardProvider'
 
@@ -6,6 +7,18 @@ import Weapons from './Weapons'
 import ScoreDisplay from './ScoreDisplay'
 import BattleWinnerDisplay from './BattleWinnerDisplay'
 import EnemyDisplay from './EnemyDisplay'
+
+const StyledResult = styled.div`
+  margin-top: 10px;
+`
+const StyledResultWinner = styled.span`
+  font-size: 18px;
+  text-transform: capitalize;
+`
+const StyledResultItem = styled(StyledResultWinner)`
+  font-weight: bold;
+  color: darkorange;
+`
 
 const Battlefield = () => {
   const [result, setResult] = useState()
@@ -17,13 +30,14 @@ const Battlefield = () => {
 
   return (
     <>
-      <ScoreDisplay />
       <EnemyDisplay />
+      <ScoreDisplay />
       <Weapons setResult={setResult} />
       {result && (
-        <div>
-          {result.winner} {result.item}
-        </div>
+        <StyledResult>
+          <StyledResultWinner>{result.winner}</StyledResultWinner>{' '}
+          <StyledResultItem>{result.item}</StyledResultItem>
+        </StyledResult>
       )}
     </>
   )
