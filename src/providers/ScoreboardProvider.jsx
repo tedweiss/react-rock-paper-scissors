@@ -3,7 +3,7 @@ import React, { createContext, useContext, useReducer } from 'react'
 const ScoreboardStateContext = createContext()
 const ScoreboardDispatchContext = createContext()
 
-const countReducer = (state, action) => {
+export const countReducer = (state, action) => {
   switch (action.type) {
     case 'select': {
       if (action.side === 'enemy') {

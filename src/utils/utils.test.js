@@ -53,15 +53,15 @@ describe('compare', () => {
 
 describe('findEnemysChoice', () => {
   it('should return "rock" for the lower 1/3', () => {
-    let choice = .23//Math.random()
+    let choice = 0.23 //Math.random()
     expect(findEnemysChoice(choice)).toEqual('rock')
   })
   it('should return "paper" for the middle 1/3', () => {
-    let choice = .53//Math.random()
+    let choice = 0.53 //Math.random()
     expect(findEnemysChoice(choice)).toEqual('paper')
   })
   it('should return "paper" for the middle 1/3', () => {
-    let choice = .83//Math.random()
+    let choice = 0.83 //Math.random()
     expect(findEnemysChoice(choice)).toEqual('scissors')
   })
 })

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useReducer } from 'react'
 const EnemyStateContext = createContext()
 const EnemyDispatchContext = createContext()
 
-const enemyReducer = (_state, action) => {
+export const enemyReducer = (_state, action) => {
   switch (action.type) {
     case 'select': {
       return { enemy: action.enemy }
