@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { useEnemyDispatch } from '../providers/EnemyProvider'
-import { enemies } from '../utils/enemies'
+import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
 import { useCountDispatch } from '../providers/ScoreboardProvider'
 
 const StyledEnemy = styled.button`
@@ -19,17 +18,21 @@ const StyledEnemy = styled.button`
 const EnemiesDisplay = () => {
   const dispatch = useEnemyDispatch()
   const countDispatch = useCountDispatch()
+  const { enemies } = useEnemyState()
   const selectEnemy = enemy => {
     dispatch({ type: 'select', enemy })
-    countDispatch({ type: 'select', side: 'enemy', enemy })
+    countDispatch({ type: 'select', side: 'enemy', selectedEnemy: enemy })
   }
 
   return enemies.map(enemy => {
-    return (
-      <StyledEnemy key={enemy.name} onClick={() => selectEnemy(enemy)}>
-        {enemy.name}
-      </StyledEnemy>
-    )
+    if (enemy.available) {
+      return (
+        <StyledEnemy key={enemy.name} onClick={() => selectEnemy(enemy)}>
+          {enemy.name}
+        </StyledEnemy>
+      )
+    }
+    return true
   })
 }
 

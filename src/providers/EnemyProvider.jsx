@@ -1,12 +1,34 @@
 import React, { createContext, useContext, useReducer } from 'react'
+import { enemies } from '../utils/enemies'
 
 const EnemyStateContext = createContext()
 const EnemyDispatchContext = createContext()
 
-export const enemyReducer = (_state, action) => {
+export const enemyReducer = (state, action) => {
   switch (action.type) {
     case 'select': {
-      return { enemy: action.enemy }
+      const enemies = (state && state.enemies) || []
+      const selectedEnemy = action.enemy || (state && state.selectedEnemy)
+      return { enemies, selectedEnemy }
+    }
+    case 'update': {
+      const updatedEnemies = state.enemies.map(enemy => {
+        if (action.winner === 'hero') {
+          if (enemy.id === action.enemy.id && !action.enemy.defeated) {
+            return { ...enemy, defeated: true }
+          }
+          if (
+            !action.enemy.defeated &&
+            enemy.position === action.enemy.position + 1
+          ) {
+            return { ...enemy, available: true }
+          }
+          return enemy
+        } else {
+          return enemy
+        }
+      })
+      return { selectedEnemy: {}, enemies: updatedEnemies }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -16,9 +38,8 @@ export const enemyReducer = (_state, action) => {
 
 const EnemyProvider = ({ children }) => {
   const [state, dispatch] = useReducer(enemyReducer, {
-    id: null,
-    name: '',
-    health: null
+    enemies,
+    selectedEnemy: {}
   })
   return (
     <EnemyStateContext.Provider value={state}>

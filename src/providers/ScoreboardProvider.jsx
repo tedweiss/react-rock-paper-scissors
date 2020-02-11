@@ -7,7 +7,7 @@ export const countReducer = (state, action) => {
   switch (action.type) {
     case 'select': {
       if (action.side === 'enemy') {
-        return { hero: state.hero, enemy: action.enemy.health }
+        return { hero: state.hero, enemy: action.selectedEnemy.health }
       }
       break
     }

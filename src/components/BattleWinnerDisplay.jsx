@@ -24,17 +24,12 @@ const StyledWinnerName = styled.span`
 const BattleWinnerDisplay = ({ battleWinner }) => {
   const dispatch = useEnemyDispatch()
   const countDispatch = useCountDispatch()
-  const { enemy } = useEnemyState()
+  const { selectedEnemy } = useEnemyState()
   const handleClick = () => {
-    const resetEnemy = {
-      id: null,
-      name: '',
-      health: null
-    }
-    dispatch({ type: 'select', enemy: resetEnemy })
+    dispatch({ type: 'update', winner: battleWinner, enemy: selectedEnemy })
     countDispatch({ type: 'reset' })
   }
-  const winnerName = battleWinner === 'hero' ? 'Hero' : enemy.name
+  const winnerName = battleWinner === 'hero' ? 'Hero' : selectedEnemy.name
   return (
     <>
       <StyledBattleMessage>

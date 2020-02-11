@@ -6,9 +6,9 @@ import EnemiesDisplay from './EnemiesDisplay'
 import Battlefield from './Battlefield'
 
 const Pages = () => {
-  const { enemy } = useEnemyState()
+  const { selectedEnemy } = useEnemyState()
 
-  if (enemy && enemy.id) {
+  if (selectedEnemy && selectedEnemy.id) {
     return <Battlefield />
   }
   return (

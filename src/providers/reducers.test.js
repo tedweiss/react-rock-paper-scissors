@@ -1,5 +1,6 @@
 import { countReducer } from './ScoreboardProvider'
 import { enemyReducer } from './EnemyProvider'
+import { enemies } from '../utils/enemies'
 
 describe('countReducer', () => {
   it('should return the state when the type is "select"', () => {
@@ -15,7 +16,12 @@ describe('countReducer', () => {
     ).toEqual({ enemy: 10, hero: 5 })
   })
   it('should return the state when the type is "reset"', () => {
-    expect(countReducer({ hero: 0, enemy: 3 }, { type: 'reset' })).toEqual({
+    expect(
+      countReducer(
+        { battleWinner: 'hero', hero: 0, enemy: 3 },
+        { type: 'reset' }
+      )
+    ).toEqual({
       enemy: 5,
       hero: 5
     })
@@ -97,6 +103,65 @@ describe('countReducer', () => {
 })
 
 describe('enemyReducer', () => {
+  const updatedEnemies = [
+    {
+      id: 'e1',
+      name: 'Enemy One',
+      weapons: {
+        rocks: ['wp1'],
+        paper: ['wp1'],
+        scissors: ['ws1']
+      },
+      protection: {
+        shield: null,
+        helmet: null,
+        armour: null
+      },
+      health: 5,
+      coins: 1,
+      position: 0,
+      available: true,
+      defeated: true
+    },
+    {
+      id: 'e2',
+      name: 'Enemy Two',
+      weapons: {
+        rocks: ['wp1', 'wp2'],
+        paper: ['wp1'],
+        scissors: ['ws1']
+      },
+      protection: {
+        shield: 'ps1',
+        helmet: null,
+        armour: null
+      },
+      health: 7,
+      coins: 2,
+      position: 1,
+      available: true,
+      defeated: false
+    },
+    {
+      id: 'e3',
+      name: 'Enemy Three',
+      weapons: {
+        rocks: ['wp1', 'wp2'],
+        paper: ['wp1', 'wp2'],
+        scissors: ['ws1']
+      },
+      protection: {
+        shield: 'ps1',
+        helmet: 'ph1',
+        armour: null
+      },
+      health: 10,
+      coins: 2,
+      position: 2,
+      available: false,
+      defeated: false
+    }
+  ]
   it('should return the state of a selected enemy', () => {
     expect(
       enemyReducer(null, {
@@ -104,5 +169,17 @@ describe('enemyReducer', () => {
         enemy: { id: 1, name: 'Enemy One', health: 5 }
       })
     ).toEqual({ enemy: { id: 1, name: 'Enemy One', health: 5 } })
+  })
+  it('should return updated enemies when the hero wins', () => {
+    expect(
+      enemyReducer(
+        { enemies },
+        {
+          type: 'update',
+          winner: 'hero',
+          enemy: enemies[0]
+        }
+      )
+    ).toEqual(updatedEnemies)
   })
 })
