@@ -10,7 +10,7 @@ describe('countReducer', () => {
         {
           type: 'select',
           side: 'enemy',
-          enemy: { id: 1, name: 'Enemy One', health: 10 }
+          selectedEnemy: enemies[2]
         }
       )
     ).toEqual({ enemy: 10, hero: 5 })
@@ -164,22 +164,37 @@ describe('enemyReducer', () => {
   ]
   it('should return the state of a selected enemy', () => {
     expect(
-      enemyReducer(null, {
-        type: 'select',
-        enemy: { id: 1, name: 'Enemy One', health: 5 }
-      })
-    ).toEqual({ enemy: { id: 1, name: 'Enemy One', health: 5 } })
+      enemyReducer(
+        { enemies, selectedEnemy: enemies[0] },
+        {
+          type: 'select',
+          selectedEnemy: updatedEnemies[1]
+        }
+      )
+    ).toEqual({ enemies, selectedEnemy: updatedEnemies[1] })
   })
   it('should return updated enemies when the hero wins', () => {
     expect(
       enemyReducer(
-        { enemies },
+        { enemies, selectedEnemy: enemies[0] },
         {
           type: 'update',
           winner: 'hero',
           enemy: enemies[0]
         }
       )
-    ).toEqual(updatedEnemies)
+    ).toEqual({ enemies: updatedEnemies, selectedEnemy: {} })
+  })
+  it('should return enemies not updated when the enemy wins', () => {
+    expect(
+      enemyReducer(
+        { enemies, selectedEnemy: enemies[0] },
+        {
+          type: 'update',
+          winner: 'enemy',
+          enemy: enemies[0]
+        }
+      )
+    ).toEqual({ enemies, selectedEnemy: {} })
   })
 })

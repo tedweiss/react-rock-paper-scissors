@@ -8,7 +8,7 @@ export const enemyReducer = (state, action) => {
   switch (action.type) {
     case 'select': {
       const enemies = (state && state.enemies) || []
-      const selectedEnemy = action.enemy || (state && state.selectedEnemy)
+      const selectedEnemy = action.selectedEnemy || (state && state.selectedEnemy)
       return { enemies, selectedEnemy }
     }
     case 'update': {
