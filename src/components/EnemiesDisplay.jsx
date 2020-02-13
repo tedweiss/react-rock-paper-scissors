@@ -20,7 +20,7 @@ const EnemiesDisplay = () => {
   const countDispatch = useCountDispatch()
   const { enemies } = useEnemyState()
   const selectEnemy = enemy => {
-    dispatch({ type: 'select', enemy })
+    dispatch({ type: 'select', selectedEnemy: enemy })
     countDispatch({ type: 'select', side: 'enemy', selectedEnemy: enemy })
   }
 

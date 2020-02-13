@@ -29,7 +29,6 @@ const Battlefield = () => {
   const [result, setResult] = useState()
   const [start, setStart] = useState('')
   const { battleWinner } = useCountState()
-
   if (result && battleWinner) {
     return <BattleWinnerDisplay battleWinner={battleWinner} />
   }

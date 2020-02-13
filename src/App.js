@@ -5,6 +5,7 @@ import { EnemyProvider } from './providers/EnemyProvider'
 import { ScoreboardProvider } from './providers/ScoreboardProvider'
 
 import Pages from './components/Pages'
+import { HeroProvider } from './providers/HeroProvider'
 
 const StyledApp = styled.div`
   text-align: center;
@@ -15,13 +16,15 @@ const StyledApp = styled.div`
 const App = () => {
   return (
     <div className='App' data-testid='App'>
-      <EnemyProvider>
-        <ScoreboardProvider>
-          <StyledApp>
-            <Pages />
-          </StyledApp>
-        </ScoreboardProvider>
-      </EnemyProvider>
+      <HeroProvider>
+        <EnemyProvider>
+          <ScoreboardProvider>
+            <StyledApp>
+              <Pages />
+            </StyledApp>
+          </ScoreboardProvider>
+        </EnemyProvider>
+      </HeroProvider>
     </div>
   )
 }
