@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
 import { useCountDispatch } from '../providers/ScoreboardProvider'
+import { useHeroState } from '../providers/HeroProvider'
 
 const StyledEnemy = styled.button`
   display: block;
@@ -23,7 +24,8 @@ const EnemiesDisplay = () => {
     dispatch({ type: 'select', selectedEnemy: enemy })
     countDispatch({ type: 'select', side: 'enemy', selectedEnemy: enemy })
   }
-
+  const { hero } = useHeroState()
+  console.log({ hero })
   return enemies.map(enemy => {
     if (enemy.available) {
       return (

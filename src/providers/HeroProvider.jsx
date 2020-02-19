@@ -1,13 +1,15 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import { hero } from '../utils/hero'
+import { updateRewards } from '../utils/utils'
 
 const HeroStateContext = createContext()
 const HeroDispatchContext = createContext()
 
 export const heroReducer = (state, action) => {
   switch (action.type) {
-    case 'select': {
-      break
+    case 'update': {
+      const updatedHero = updateRewards(state.hero, action.rewards)
+      return { hero: updatedHero }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -16,7 +18,7 @@ export const heroReducer = (state, action) => {
 }
 
 const HeroProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(heroReducer, {hero})
+  const [state, dispatch] = useReducer(heroReducer, { hero })
   return (
     <HeroStateContext.Provider value={state}>
       <HeroDispatchContext.Provider value={dispatch}>

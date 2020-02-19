@@ -3,7 +3,7 @@ export const enemies = [
     id: 'e1',
     name: 'Enemy One',
     weapons: {
-      rocks: ['wp1'],
+      rocks: ['wr1'],
       paper: ['wp1'],
       scissors: ['ws1']
     },
@@ -13,7 +13,17 @@ export const enemies = [
       armour: null
     },
     health: 5,
-    coins: 1,
+    rewards: {
+      weapons: {
+        type: 'rocks',
+        id: 'wr2'
+      },
+      protection: {
+        type: 'shield',
+        id: 'ps1'
+      },
+      coins: 1
+    },
     position: 0,
     available: true,
     defeated: false
@@ -22,7 +32,7 @@ export const enemies = [
     id: 'e2',
     name: 'Enemy Two',
     weapons: {
-      rocks: ['wp1', 'wp2'],
+      rocks: ['wr1', 'wr2'],
       paper: ['wp1'],
       scissors: ['ws1']
     },
@@ -41,7 +51,7 @@ export const enemies = [
     id: 'e3',
     name: 'Enemy Three',
     weapons: {
-      rocks: ['wp1', 'wp2'],
+      rocks: ['wr1', 'wr2'],
       paper: ['wp1', 'wp2'],
       scissors: ['ws1']
     },

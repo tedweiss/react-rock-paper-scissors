@@ -1,4 +1,5 @@
-import { compare, findEnemysChoice } from './utils'
+import { compare, findEnemysChoice, updateRewards } from './utils'
+import { hero } from './hero'
 
 describe('compare', () => {
   it('should return the item when both choices are the same', () => {
@@ -63,5 +64,45 @@ describe('findEnemysChoice', () => {
   it('should return "paper" for the middle 1/3', () => {
     let choice = 0.83 //Math.random()
     expect(findEnemysChoice(choice)).toEqual('scissors')
+  })
+})
+
+describe('updateRewards', () => {
+  const rewards = {
+    weapons: {
+      type: 'rocks',
+      id: 'wr2'
+    },
+    protection: {
+      type: 'shield',
+      id: 'ps1'
+    },
+    coins: 1
+  }
+  const updatedHero = {
+    id: 'h1',
+    name: 'Hero',
+    weapons: {
+      rocks: ['wr1', 'wr2'],
+    paper: ['wp1'], 
+    scissors: ['ws1'] },
+    protection: { 
+      shield: ['ps1'], 
+      helmet: [], 
+      armour: [] },
+    health: 5,
+    coins: 1
+  }
+  it('should return updated coin reward', () => {
+    const updatedCoinsReward = updateRewards(hero, rewards).coins
+    expect(updatedCoinsReward).toEqual(updatedHero.coins)
+  })
+  it('should return updated weapons reward', () => {
+    const updatedRockWeapons = updateRewards(hero, rewards).weapons.rocks
+    expect(updatedRockWeapons).toEqual(updatedHero.weapons.rocks)
+  })
+  it('should return updated protection reward', () => {
+    const updatedShieldProtection = updateRewards(hero, rewards).protection.shield
+    expect(updatedShieldProtection).toEqual(updatedHero.protection.shield)
   })
 })

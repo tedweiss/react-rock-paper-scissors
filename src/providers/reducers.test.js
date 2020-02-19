@@ -1,6 +1,8 @@
 import { countReducer } from './ScoreboardProvider'
 import { enemyReducer } from './EnemyProvider'
 import { enemies } from '../utils/enemies'
+import { heroReducer } from './HeroProvider'
+import { hero } from '../utils/hero'
 
 describe('countReducer', () => {
   it('should return the state when the type is "select"', () => {
@@ -108,7 +110,7 @@ describe('enemyReducer', () => {
       id: 'e1',
       name: 'Enemy One',
       weapons: {
-        rocks: ['wp1'],
+        rocks: ['wr1'],
         paper: ['wp1'],
         scissors: ['ws1']
       },
@@ -118,7 +120,17 @@ describe('enemyReducer', () => {
         armour: null
       },
       health: 5,
-      coins: 1,
+      rewards: {
+        weapons: {
+          type: 'rocks',
+          id: 'wr2'
+        },
+        protection: {
+          type: 'shield',
+          id: 'ps1'
+        },
+        coins: 1
+      },
       position: 0,
       available: true,
       defeated: true
@@ -127,7 +139,7 @@ describe('enemyReducer', () => {
       id: 'e2',
       name: 'Enemy Two',
       weapons: {
-        rocks: ['wp1', 'wp2'],
+        rocks: ['wr1', 'wr2'],
         paper: ['wp1'],
         scissors: ['ws1']
       },
@@ -146,7 +158,7 @@ describe('enemyReducer', () => {
       id: 'e3',
       name: 'Enemy Three',
       weapons: {
-        rocks: ['wp1', 'wp2'],
+        rocks: ['wr1', 'wr2'],
         paper: ['wp1', 'wp2'],
         scissors: ['ws1']
       },
@@ -196,5 +208,11 @@ describe('enemyReducer', () => {
         }
       )
     ).toEqual({ enemies, selectedEnemy: {} })
+  })
+})
+
+xdescribe('heroReducer', () => {
+  it('', () => {
+    expect(heroReducer(hero, )).toEqual()
   })
 })

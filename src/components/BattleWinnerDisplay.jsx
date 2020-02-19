@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
 import { useCountDispatch } from '../providers/ScoreboardProvider'
+import { useHeroDispatch } from '../providers/HeroProvider'
 
 const StyledNext = styled.button`
   display: block;
@@ -24,10 +25,12 @@ const StyledWinnerName = styled.span`
 const BattleWinnerDisplay = ({ battleWinner }) => {
   const dispatch = useEnemyDispatch()
   const countDispatch = useCountDispatch()
+  const heroDispatch = useHeroDispatch()
   const { selectedEnemy } = useEnemyState()
   const handleClick = () => {
     dispatch({ type: 'update', winner: battleWinner, enemy: selectedEnemy })
     countDispatch({ type: 'reset' })
+    /*battleWinner === 'hero' && */ heroDispatch({ type: 'update', rewards: selectedEnemy.rewards })
   }
   const winnerName = battleWinner === 'hero' ? 'Hero' : selectedEnemy.name
   return (

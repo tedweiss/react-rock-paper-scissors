@@ -2,14 +2,14 @@ export const hero = {
   id: 'h1',
   name: 'Hero',
   weapons: {
-    rocks: ['wp1'],
+    rocks: ['wr1'],
     paper: ['wp1'],
     scissors: ['ws1']
   },
   protection: {
-    shield: null,
-    helmet: null,
-    armour: null
+    shield: [],
+    helmet: [],
+    armour: []
   },
   health: 5,
   coins: 0
