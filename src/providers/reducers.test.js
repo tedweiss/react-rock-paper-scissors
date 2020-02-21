@@ -126,7 +126,7 @@ describe('enemyReducer', () => {
           id: 'wr2'
         },
         protection: {
-          type: 'shield',
+          type: 'shields',
           id: 'ps1'
         },
         coins: 1

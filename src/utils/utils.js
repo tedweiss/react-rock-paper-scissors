@@ -71,23 +71,26 @@ export const displayBattleStart = (
 
 export const updateRewards = (hero, rewards) => {
   let updatedHero = hero
+
   let weaponsType = updatedHero.weapons[rewards.weapons.type]
-  weaponsType.map(weapon => {
+  weaponsType.map(() => {
     if (weaponsType.indexOf(rewards.weapons.id) < 0) {
-      updatedHero.weapons[rewards.weapons.type] = weaponsType.concat(rewards.weapons.id)
+      updatedHero.weapons[rewards.weapons.type] = weaponsType.concat(
+        rewards.weapons.id
+      )
     }
     return true
   })
+
   let protectionType = updatedHero.protection[rewards.protection.type]
-  protectionType.map(protection => {
-    if (protectionType.indexOf(protection) < 0) {
-      protectionType = protectionType.concat(rewards.protection.id)
+  const updatedProtection = protectionType.map(protection => {
+    if (protection.id === rewards.protection.id) {
+      protection.available = true
     }
-    return true
+    return protection
   })
-  if (protectionType.indexOf(rewards.protection.id) < 0) {
-    protectionType = protectionType.push(rewards.protection.id)
-  }
+  updatedHero.protection[rewards.protection.type] = updatedProtection
+
   updatedHero.coins = updatedHero.coins + rewards.coins
   console.log('updated reward updatedHero', updatedHero)
   return updatedHero
