@@ -118,8 +118,9 @@ describe('updateRewards', () => {
     expect(updatedCoinsReward).toEqual(updatedHero.coins)
   })
   it('should return updated weapons reward', () => {
-    const updatedRockWeapons = updateRewards(hero, rewards).weapons.rocks
-    expect(updatedRockWeapons).toEqual(updatedHero.weapons.rocks)
+    const updatedRockWeapons = updateRewards(hero, rewards).weapons.rocks[1]
+      .available
+    expect(updatedRockWeapons).toEqual(true)
   })
   it('should return updated protection reward', () => {
     const updatedShieldProtection = updateRewards(hero, rewards).protection

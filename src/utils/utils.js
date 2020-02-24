@@ -73,15 +73,12 @@ export const updateRewards = (hero, rewards) => {
   let updatedHero = hero
 
   let weaponsType = updatedHero.weapons[rewards.weapons.type]
-  weaponsType.map(() => {
-    if (weaponsType.indexOf(rewards.weapons.id) < 0) {
-      updatedHero.weapons[rewards.weapons.type] = weaponsType.concat(
-        rewards.weapons.id
-      )
+  weaponsType.map((weapon, index) => {
+    if (weapon.id === rewards.weapons.id) {
+      updatedHero.weapons[rewards.weapons.type][index].available = true
     }
     return true
   })
-
   let protectionType = updatedHero.protection[rewards.protection.type]
   const updatedProtection = protectionType.map(protection => {
     if (protection.id === rewards.protection.id) {
