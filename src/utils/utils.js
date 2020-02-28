@@ -89,6 +89,24 @@ export const updateRewards = (hero, rewards) => {
   updatedHero.protection[rewards.protection.type] = updatedProtection
 
   updatedHero.coins = updatedHero.coins + rewards.coins
-  console.log('updated reward updatedHero', updatedHero)
   return updatedHero
+}
+
+export const findRewards = (selectedEnemy, items) => {
+  let weaponName
+  items.weapons.map(weapon => {
+    if (weapon.id === selectedEnemy.rewards.weapons.id) {
+      weaponName = weapon.name
+    }
+    return true
+  })
+
+  let protectionName
+  items.protection.map(protection => {
+    if (protection.id === selectedEnemy.rewards.protection.id) {
+      protectionName = protection.name
+    }
+    return true
+  })
+  return { weaponName, protectionName, coins: selectedEnemy.rewards.coins }
 }

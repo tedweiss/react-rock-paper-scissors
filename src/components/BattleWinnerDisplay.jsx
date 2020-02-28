@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
 import { useCountDispatch } from '../providers/ScoreboardProvider'
 import { useHeroDispatch } from '../providers/HeroProvider'
+import RewardDisplay from './RewardsDisplay'
 
 const StyledNext = styled.button`
   display: block;
@@ -30,7 +31,10 @@ const BattleWinnerDisplay = ({ battleWinner }) => {
   const handleClick = () => {
     dispatch({ type: 'update', winner: battleWinner, enemy: selectedEnemy })
     countDispatch({ type: 'reset' })
-    /*battleWinner === 'hero' && */ heroDispatch({ type: 'update', rewards: selectedEnemy.rewards })
+    /*battleWinner === 'hero' && */ heroDispatch({
+      type: 'update',
+      rewards: selectedEnemy.rewards
+    })
   }
   const winnerName = battleWinner === 'hero' ? 'Hero' : selectedEnemy.name
   return (
@@ -39,6 +43,7 @@ const BattleWinnerDisplay = ({ battleWinner }) => {
         <StyledWinnerName>{winnerName}</StyledWinnerName> wins!
       </StyledBattleMessage>
       <StyledNext onClick={handleClick}>Play Again</StyledNext>
+      <RewardDisplay />
     </>
   )
 }
