@@ -1,54 +1,83 @@
-import { compare, findEnemysChoice, updateRewards, findRewards } from './utils'
+import {
+  compare,
+  findEnemysChoice,
+  updateRewards,
+  findRewards,
+  findHeroWeapons,
+  findEnemysItem
+} from './utils'
 import { hero } from './hero'
 import { items } from './items'
 
 describe('compare', () => {
   it('should return the item when both choices are the same', () => {
-    expect(compare('rock', 'rock').item).toEqual('rock')
+    expect(compare('wr1', 'wr1').item).toEqual('rocks')
   })
   it('should return "tie" when both choices are the same', () => {
-    expect(compare('rock', 'rock').winner).toEqual('tie')
+    expect(compare('wr1', 'wr1').winner).toEqual('tie')
+  })
+  it('should return the heroChoice', () => {
+    const heroItem = {
+      id: 'wr1',
+      name: 'Grain of Sand',
+      power: 1,
+      price: 1,
+      size: 'xs',
+      type: 'rocks'
+    }
+    expect(compare('wr1', 'ws1').heroChoice).toEqual(heroItem)
+  })
+  it('should return the enemyChoice', () => {
+    const enemyItem = {
+      id: 'ws1',
+      name: 'Safety Scissors',
+      power: 1,
+      price: 1,
+      size: 'sx',
+      type: 'scissors'
+    }
+    expect(compare('wr1', 'ws1').enemyChoice).toEqual(enemyItem)
   })
   describe('rock is the first choice', () => {
     it('should return "rock" when "rock" and "scissors" are passed in', () => {
-      expect(compare('rock', 'scissors').item).toEqual('rock')
+      expect(compare('wr1', 'ws1').item).toEqual('rock')
     })
     it('should return "hero" when "rock" and "scissors" are passed in', () => {
-      expect(compare('rock', 'scissors').winner).toEqual('hero')
+      expect(compare('wr1', 'ws1').winner).toEqual('hero')
     })
     it('should return "paper" when "rock" and "paper" are passed in', () => {
-      expect(compare('rock', 'paper').item).toEqual('paper')
+      expect(compare('wr1', 'wp1').item).toEqual('paper')
     })
     it('should return "enemy" when "rock" and "paper" are passed in', () => {
-      expect(compare('rock', 'paper').winner).toEqual('enemy')
+      expect(compare('wr1', 'wp1').winner).toEqual('enemy')
     })
   })
   describe('paper is the first choice', () => {
     it('should return "paper" when "paper" and "rock" are passed in', () => {
-      expect(compare('paper', 'rock').item).toEqual('paper')
+      expect(compare('wp1', 'wr1').item).toEqual('paper')
     })
     it('should return "hero" when "paper" and "rock" are passed in', () => {
-      expect(compare('paper', 'rock').winner).toEqual('hero')
+      expect(compare('wp1', 'wr1').winner).toEqual('hero')
     })
     it('should return "paper" when "paper" and "scissors" are passed in', () => {
-      expect(compare('paper', 'scissors').item).toEqual('scissors')
+      expect(compare('wp1', 'ws1').item).toEqual('scissors')
     })
     it('should return "enemy" when "paper" and "scissors" are passed in', () => {
-      expect(compare('paper', 'scissors').winner).toEqual('enemy')
+      expect(compare('wp1', 'ws1').winner).toEqual('enemy')
     })
   })
   describe('scrissors is the first choice', () => {
     it('should return "rock" when "scissors" and "rock" are passed in', () => {
-      expect(compare('scissors', 'rock').item).toEqual('scissors')
+      expect(compare('ws1', 'wr1').item).toEqual('scissors')
     })
     it('should return "hero" when "scissors" and "rock" are passed in', () => {
-      expect(compare('scissors', 'rock').winner).toEqual('hero')
+      expect(compare('ws1', 'wr1').winner).toEqual('hero')
     })
     it('should return "scissors" when "scissors" and "paper" are passed in', () => {
-      expect(compare('scissors', 'paper').item).toEqual('rock')
+      expect(compare('ws1', 'wp1').item).toEqual('rock')
     })
     it('should return "enemy" when "scissors" and "paper" are passed in', () => {
-      expect(compare('scissors', 'paper').winner).toEqual('enemy')
+      expect(compare('ws1', 'wp1').winner).toEqual('enemy')
     })
   })
 })
@@ -56,7 +85,7 @@ describe('compare', () => {
 describe('findEnemysChoice', () => {
   it('should return "rock" for the lower 1/3', () => {
     let choice = 0.23 //Math.random()
-    expect(findEnemysChoice(choice)).toEqual('rock')
+    expect(findEnemysChoice(choice)).toEqual('rocks')
   })
   it('should return "paper" for the middle 1/3', () => {
     let choice = 0.53 //Math.random()
@@ -161,5 +190,101 @@ describe('findRewards', () => {
   it('should return the coins rewarded', () => {
     const rewardsCoins = coins
     expect(rewardsCoins).toEqual(1)
+  })
+})
+
+describe('findHeroWeapons', () => {
+  it('should return the weapons that the hero has available and has a count more than 0', () => {
+    const heroWeapons = findHeroWeapons(hero.weapons)
+    const resultHeroWeapons = [
+      {
+        id: 'wr1',
+        name: 'Grain of Sand',
+        power: 1,
+        price: 1,
+        size: 'xs',
+        type: 'rocks'
+      },
+      {
+        id: 'wp1',
+        name: 'Post-It',
+        power: 1,
+        price: 1,
+        size: 'xs',
+        type: 'paper'
+      },
+      {
+        id: 'ws1',
+        name: 'Safety Scissors',
+        power: 1,
+        price: 1,
+        size: 'sx',
+        type: 'scissors'
+      }
+    ]
+    expect(heroWeapons).toEqual(resultHeroWeapons)
+  })
+})
+
+describe('findEnemysItem', () => {
+  describe('items length is 5', () => {
+    const fiveItems = ['wr1', 'wr2', 'wr3', 'wr4', 'wr5']
+    it('returns the first item in the array', () => {
+      expect(findEnemysItem(0.1, fiveItems)).toEqual('wr1')
+    })
+    it('returns the second item in the array', () => {
+      expect(findEnemysItem(0.3, fiveItems)).toEqual('wr2')
+    })
+    it('returns the third item in the array', () => {
+      expect(findEnemysItem(0.5, fiveItems)).toEqual('wr3')
+    })
+    it('returns the fourth item in the array', () => {
+      expect(findEnemysItem(0.7, fiveItems)).toEqual('wr4')
+    })
+    it('returns the first item in the array', () => {
+      expect(findEnemysItem(0.9, fiveItems)).toEqual('wr5')
+    })
+  })
+  describe('items length is 4', () => {
+    const fourItems = ['wr1', 'wr2', 'wr3', 'wr4']
+    it('returns the first item in the array', () => {
+      expect(findEnemysItem(0.1, fourItems)).toEqual('wr1')
+    })
+    it('returns the second item in the array', () => {
+      expect(findEnemysItem(0.3, fourItems)).toEqual('wr2')
+    })
+    it('returns the third item in the array', () => {
+      expect(findEnemysItem(0.6, fourItems)).toEqual('wr3')
+    })
+    it('returns the fourth item in the array', () => {
+      expect(findEnemysItem(0.8, fourItems)).toEqual('wr4')
+    })
+  })
+  describe('items length is 3', () => {
+    const threeItems = ['wr1', 'wr2', 'wr3']
+    it('returns the first item in the array', () => {
+      expect(findEnemysItem(0.1, threeItems)).toEqual('wr1')
+    })
+    it('returns the second item in the array', () => {
+      expect(findEnemysItem(0.4, threeItems)).toEqual('wr2')
+    })
+    it('returns the third item in the array', () => {
+      expect(findEnemysItem(0.8, threeItems)).toEqual('wr3')
+    })
+  })
+  describe('items length is 2', () => {
+    const twoItems = ['wr1', 'wr2']
+    it('returns the first item in the array', () => {
+      expect(findEnemysItem(0.1, twoItems)).toEqual('wr1')
+    })
+    it('returns the second item in the array', () => {
+      expect(findEnemysItem(0.7, twoItems)).toEqual('wr2')
+    })
+  })
+  describe('items length is 1', () => {
+    const oneItem = ['wr1']
+    it('returns the item in the array', () => {
+      expect(findEnemysItem(0.1, oneItem)).toEqual('wr1')
+    })
   })
 })

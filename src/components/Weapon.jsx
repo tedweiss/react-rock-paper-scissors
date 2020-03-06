@@ -14,14 +14,14 @@ const StyledWeapon = styled.button`
   outline: none;
   cursor: pointer;
 `
-const Weapon = ({ displayResult, name }) => {
+const Weapon = ({ displayResult, weapon }) => {
   return (
     <StyledWeapon
       onClick={() => {
-        displayResult(name)
+        displayResult(weapon.id)
       }}
     >
-      {name}
+      {weapon.name}
     </StyledWeapon>
   )
 }

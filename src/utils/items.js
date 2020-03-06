@@ -15,6 +15,22 @@ export const items = {
       size: 'sm',
       power: 2,
       price: 2
+    },
+    {
+      id: 'wp1',
+      type: 'paper',
+      name: 'Post-It',
+      size: 'xs',
+      power: 1,
+      price: 1
+    },
+    {
+      id: 'ws1',
+      type: 'scissors',
+      name: 'Safety Scissors',
+      size: 'sx',
+      power: 1,
+      price: 1
     }
   ],
   protection: [
