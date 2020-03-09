@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { useCountDispatch } from '../providers/ScoreboardProvider'
 import { useEnemyState } from '../providers/EnemyProvider'
 import { useHeroState } from '../providers/HeroProvider'
-import { items } from '../utils/items'
 import {
   compare,
   displayBattleStart,
@@ -13,19 +12,25 @@ import {
   findHeroWeapons
 } from '../utils/utils'
 
-import Weapon from './Weapon'
+import WeaponGroup from './WeaponGroup'
 
 const StyledWeapons = styled.div`
-  display: flex;
-  margin: 0 auto;
-  max-width: 500px;
+  display: block;
+  width: 700px;
+`
+const Title = styled.h2`
+  font-size: 26px;
+  margin: 0;
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
 `
 
 const Weapons = ({ setResult, setStart }) => {
   const { selectedEnemy } = useEnemyState()
   const { hero } = useHeroState()
   const dispatch = useCountDispatch()
-  const weaponChoices = findHeroWeapons(hero.weapons, items.weapons)
+  const { rocks, paper, scissors } = findHeroWeapons(hero.weapons)
   const startingWords = ['rock', 'paper', 'scissors', 'shoot']
 
   const displayResult = weaponId => {
@@ -40,15 +45,22 @@ const Weapons = ({ setResult, setStart }) => {
 
   return (
     <StyledWeapons>
-      {weaponChoices.map(weapon => {
-        return (
-          <Weapon
-            key={weapon.id}
-            weapon={weapon}
-            displayResult={displayResult}
-          />
-        )
-      })}
+      <Title>Weapons</Title>
+      <WeaponGroup
+        displayResult={displayResult}
+        title='Rocks'
+        weapons={rocks}
+      />
+      <WeaponGroup
+        displayResult={displayResult}
+        title='Paper'
+        weapons={paper}
+      />
+      <WeaponGroup
+        displayResult={displayResult}
+        title='Scissors'
+        weapons={scissors}
+      />
     </StyledWeapons>
   )
 }

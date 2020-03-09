@@ -13,11 +13,13 @@ export const findEnemysChoice = choice => {
 }
 
 export const findHeroWeapons = weapons => {
-  let heroWeapons = []
+  let rocks = []
+  let paper = []
+  let scissors = []
   items.weapons.map(item => {
     weapons.rocks.map(rock => {
       if (rock.id === item.id && rock.available && rock.count > 0) {
-        heroWeapons.push(item)
+        rocks.push(item)
       }
       return true
     })
@@ -27,7 +29,7 @@ export const findHeroWeapons = weapons => {
         paperItem.available &&
         paperItem.count > 0
       ) {
-        heroWeapons.push(item)
+        paper.push(item)
       }
       return true
     })
@@ -37,13 +39,13 @@ export const findHeroWeapons = weapons => {
         scissorsItem.available &&
         scissorsItem.count > 0
       ) {
-        heroWeapons.push(item)
+        scissors.push(item)
       }
       return true
     })
     return true
   })
-  return heroWeapons
+  return { rocks, paper, scissors }
 }
 
 export const findEnemysItem = (randomNumber, items) => {

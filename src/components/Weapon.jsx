@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledWeapon = styled.button`
-  padding: 25px;
+  padding: 15px 10px;
   border-radius: 4px;
   background-color: blue;
   color: white;
@@ -11,6 +11,7 @@ const StyledWeapon = styled.button`
   font-weight: bold;
   margin: 10px;
   width: 100%;
+  max-width: 225px;
   outline: none;
   cursor: pointer;
 `

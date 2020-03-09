@@ -9,7 +9,7 @@ import { HeroProvider } from './providers/HeroProvider'
 
 const StyledApp = styled.div`
   text-align: center;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 30px auto 0;
 `
 

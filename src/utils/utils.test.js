@@ -196,32 +196,38 @@ describe('findRewards', () => {
 describe('findHeroWeapons', () => {
   it('should return the weapons that the hero has available and has a count more than 0', () => {
     const heroWeapons = findHeroWeapons(hero.weapons)
-    const resultHeroWeapons = [
-      {
-        id: 'wr1',
-        name: 'Grain of Sand',
-        power: 1,
-        price: 1,
-        size: 'xs',
-        type: 'rocks'
-      },
-      {
-        id: 'wp1',
-        name: 'Post-It',
-        power: 1,
-        price: 1,
-        size: 'xs',
-        type: 'paper'
-      },
-      {
-        id: 'ws1',
-        name: 'Safety Scissors',
-        power: 1,
-        price: 1,
-        size: 'sx',
-        type: 'scissors'
-      }
-    ]
+    const resultHeroWeapons = {
+      rocks: [
+        {
+          id: 'wr1',
+          name: 'Grain of Sand',
+          power: 1,
+          price: 1,
+          size: 'xs',
+          type: 'rocks'
+        }
+      ],
+      paper: [
+        {
+          id: 'wp1',
+          name: 'Post-It',
+          power: 1,
+          price: 1,
+          size: 'xs',
+          type: 'paper'
+        }
+      ],
+      scissors: [
+        {
+          id: 'ws1',
+          name: 'Safety Scissors',
+          power: 1,
+          price: 1,
+          size: 'sx',
+          type: 'scissors'
+        }
+      ]
+    }
     expect(heroWeapons).toEqual(resultHeroWeapons)
   })
 })

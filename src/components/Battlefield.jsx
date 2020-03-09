@@ -8,6 +8,10 @@ import ScoreDisplay from './ScoreDisplay'
 import BattleWinnerDisplay from './BattleWinnerDisplay'
 import EnemyDisplay from './EnemyDisplay'
 
+const StyledBattlefield = styled.div`
+  display: flex;
+`
+
 const StyledResult = styled.div`
   margin-top: 10px;
 `
@@ -34,18 +38,20 @@ const Battlefield = () => {
   }
 
   return (
-    <>
-      <EnemyDisplay />
-      <ScoreDisplay />
+    <StyledBattlefield>
       <Weapons setResult={setResult} setStart={setStart} />
-      <StyledStart>{start}</StyledStart>
-      {result && (
-        <StyledResult>
-          <StyledResultWinner>{result.winner}</StyledResultWinner>{' '}
-          <StyledResultItem>{result.item}</StyledResultItem>
-        </StyledResult>
-      )}
-    </>
+      <div>
+        <EnemyDisplay />
+        <ScoreDisplay />
+        <StyledStart>{start}</StyledStart>
+        {result && (
+          <StyledResult>
+            <StyledResultWinner>{result.winner}</StyledResultWinner>{' '}
+            <StyledResultItem>{result.item}</StyledResultItem>
+          </StyledResult>
+        )}
+      </div>
+    </StyledBattlefield>
   )
 }
 
