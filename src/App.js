@@ -3,9 +3,8 @@ import styled from 'styled-components'
 
 import { EnemyProvider } from './providers/EnemyProvider'
 import { ScoreboardProvider } from './providers/ScoreboardProvider'
-
-import Pages from './components/Pages'
 import { HeroProvider } from './providers/HeroProvider'
+import Welcome from './components/Welcome'
 
 const StyledApp = styled.div`
   text-align: center;
@@ -20,7 +19,13 @@ const App = () => {
         <EnemyProvider>
           <ScoreboardProvider>
             <StyledApp>
-              <Pages />
+              {/* <Router> */}
+              {/* <Pages /> */}
+              <Welcome />
+              {/* <Battlefield path='battlefield' />
+                <EnemiesDisplay path='enemy-display' />
+                <Marketplace path='marketplace' />
+              </Router> */}
             </StyledApp>
           </ScoreboardProvider>
         </EnemyProvider>

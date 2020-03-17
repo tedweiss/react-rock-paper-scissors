@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigate } from '@reach/router'
 import styled from 'styled-components'
 
 import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
@@ -23,6 +24,7 @@ const EnemiesDisplay = () => {
   const selectEnemy = enemy => {
     dispatch({ type: 'select', selectedEnemy: enemy })
     countDispatch({ type: 'select', side: 'enemy', selectedEnemy: enemy })
+    navigate('battlefield')
   }
   const { hero } = useHeroState()
   console.log({ hero })

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHeroState } from '../providers/HeroProvider'
 import MarketItemGroup from './MarketItemGroup'
+import { navigate } from '@reach/router'
 
 const Marketplace = () => {
   const { hero } = useHeroState()
@@ -28,6 +29,13 @@ const Marketplace = () => {
           })}
         </div>
       </div>
+      <button
+        onClick={() => {
+          navigate('enemies-display')
+        }}
+      >
+        Continue your next Battle
+      </button>
     </>
   )
 }
