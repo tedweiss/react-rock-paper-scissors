@@ -19,13 +19,7 @@ const App = () => {
         <EnemyProvider>
           <ScoreboardProvider>
             <StyledApp>
-              {/* <Router> */}
-              {/* <Pages /> */}
               <Welcome />
-              {/* <Battlefield path='battlefield' />
-                <EnemiesDisplay path='enemy-display' />
-                <Marketplace path='marketplace' />
-              </Router> */}
             </StyledApp>
           </ScoreboardProvider>
         </EnemyProvider>
