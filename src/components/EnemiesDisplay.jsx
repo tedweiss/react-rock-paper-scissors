@@ -28,16 +28,38 @@ const EnemiesDisplay = () => {
   }
   const { hero } = useHeroState()
   console.log({ hero })
-  return enemies.map(enemy => {
-    if (enemy.available) {
-      return (
-        <StyledEnemy key={enemy.name} onClick={() => selectEnemy(enemy)}>
-          {enemy.name}
-        </StyledEnemy>
-      )
+
+  let displayMarketButton
+  enemies.map((enemy, index) => {
+    if (enemy.available && index > 0) {
+      displayMarketButton = true
     }
     return true
   })
+
+  return (
+    <>
+      {enemies.map(enemy => {
+        if (enemy.available) {
+          return (
+            <StyledEnemy key={enemy.name} onClick={() => selectEnemy(enemy)}>
+              {enemy.name}
+            </StyledEnemy>
+          )
+        }
+        return true
+      })}
+      {displayMarketButton && (
+        <button
+          onClick={() => {
+            navigate('marketplace')
+          }}
+        >
+          Marketplace
+        </button>
+      )}
+    </>
+  )
 }
 
 export default EnemiesDisplay

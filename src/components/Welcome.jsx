@@ -6,7 +6,11 @@ import Battlefield from './Battlefield'
 import Marketplace from './Marketplace'
 
 const Welcome = () => {
-  const [displayWelcome, setDisplayWelcome] = useState(true)
+  const url = window.location.href
+  const urlSplit = url.split('/')
+  const path = urlSplit[urlSplit.length - 1]
+
+  const [displayWelcome, setDisplayWelcome] = useState(path === '')
   const handleClick = path => {
     navigate(path)
     path && setDisplayWelcome(false)
@@ -18,9 +22,6 @@ const Welcome = () => {
           Welcome Hero
           <button onClick={() => handleClick('enemies-display')}>
             EnemiesDisplay
-          </button>
-          <button onClick={() => handleClick('marketplace')}>
-            Marketplace
           </button>
         </div>
       )}
