@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { StyledMarketplaceButton } from '../utils/MarketplaceButton'
 import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
 import { useCountDispatch } from '../providers/ScoreboardProvider'
 import { useHeroDispatch } from '../providers/HeroProvider'
@@ -55,13 +56,13 @@ const BattleWinnerDisplay = ({ battleWinner }) => {
         {buttonText}
       </StyledNext>
       {(battleWinner === 'hero' || selectedEnemy.defeated) && (
-        <button
+        <StyledMarketplaceButton
           onClick={() => {
             handleClick('marketplace')
           }}
         >
           Marketplace
-        </button>
+        </StyledMarketplaceButton>
       )}
       <RewardDisplay />
     </>

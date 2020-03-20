@@ -2,6 +2,7 @@ import React from 'react'
 import { navigate } from '@reach/router'
 import styled from 'styled-components'
 
+import { StyledMarketplaceButton } from '../utils/MarketplaceButton'
 import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
 import { useCountDispatch } from '../providers/ScoreboardProvider'
 import { useHeroState } from '../providers/HeroProvider'
@@ -50,13 +51,13 @@ const EnemiesDisplay = () => {
         return true
       })}
       {displayMarketButton && (
-        <button
+        <StyledMarketplaceButton
           onClick={() => {
             navigate('marketplace')
           }}
         >
           Marketplace
-        </button>
+        </StyledMarketplaceButton>
       )}
     </>
   )
