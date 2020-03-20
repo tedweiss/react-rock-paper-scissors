@@ -6,10 +6,26 @@ import { useCountState } from '../providers/ScoreboardProvider'
 const StyledCountDisplay = styled.div`
   display: flex;
   justify-content: space-evenly;
+  width: 100%;
+  width: 450px;
   margin: 25px 0 15px;
   font-size: 18px;
 `
-const StyledScore = styled.span`
+const StyledScoreBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+const StyledScoreTitle = styled.div`
+  font-size: 20px;
+  margin-bottom: 10px;
+`
+const StyledScore = styled.div`
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: 24px;
+  width: 30px;
+  align-self: center;
+  padding: 4px 5px;
   color: green;
   font-weight: bold;
 `
@@ -19,12 +35,14 @@ const CountDisplay = () => {
 
   return (
     <StyledCountDisplay>
-      <div>
-        The Hero's score is <StyledScore>{hero}</StyledScore>
-      </div>
-      <div>
-        The Enemy's score is <StyledScore>{enemy}</StyledScore>
-      </div>
+      <StyledScoreBox>
+        <StyledScoreTitle>Hero's score</StyledScoreTitle>
+        <StyledScore>{hero}</StyledScore>
+      </StyledScoreBox>
+      <StyledScoreBox>
+        <StyledScoreTitle>Enemy's score</StyledScoreTitle>
+        <StyledScore>{enemy}</StyledScore>
+      </StyledScoreBox>
     </StyledCountDisplay>
   )
 }
