@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { navigate } from '@reach/router'
 
 import { StyledMarketplaceButton } from '../utils/MarketplaceButton'
 import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
 import { useCountDispatch } from '../providers/ScoreboardProvider'
 import { useHeroDispatch } from '../providers/HeroProvider'
 import RewardDisplay from './RewardsDisplay'
-import { navigate } from '@reach/router'
 
 const StyledNext = styled.button`
   display: block;

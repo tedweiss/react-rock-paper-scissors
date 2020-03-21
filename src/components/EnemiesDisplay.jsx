@@ -1,6 +1,6 @@
 import React from 'react'
-import { navigate } from '@reach/router'
 import styled from 'styled-components'
+import { navigate } from '@reach/router'
 
 import { StyledMarketplaceButton } from '../utils/MarketplaceButton'
 import { useEnemyDispatch, useEnemyState } from '../providers/EnemyProvider'
