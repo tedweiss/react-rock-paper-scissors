@@ -8,7 +8,12 @@ const HeroDispatchContext = createContext()
 export const heroReducer = (state, action) => {
   switch (action.type) {
     case 'update': {
-      const updatedHero = updateRewards(state.hero, action.rewards)
+      let updatedHero
+      if (action.rewards) {
+        updatedHero = updateRewards(state.hero || state, action.rewards)
+      } else {
+        updatedHero = action.updatedHero
+      }
       return { hero: updatedHero }
     }
     default: {

@@ -209,3 +209,68 @@ export const findRewards = (selectedEnemy, items) => {
   })
   return { weaponName, protectionName, coins: selectedEnemy.rewards.coins }
 }
+
+export const findHerosItem = (group, hero, itemId, type) => {
+  let returnItem
+  if (group === 'weapons') {
+    let weaponsType = hero.weapons[type]
+    weaponsType.map(weapon => {
+      if (weapon.id === itemId) {
+        returnItem = weapon
+      }
+      return true
+    })
+  } else if (group === 'protection') {
+    let protectionType = hero.protection[type]
+    protectionType.map(protection => {
+      if (protection.id === itemId) {
+        returnItem = protection
+      }
+      return true
+    })
+  }
+  return returnItem
+}
+
+export const findItem = (group, itemId) => {
+  let item
+  items[group].map(type => {
+    if (type.id === itemId) {
+      item = type
+    }
+    return true
+  })
+  return item
+}
+
+export const buyItem = (group, hero, itemId, setHasNotEnoughCoins, type) => {
+  let updatedHero = hero
+  if (group === 'weapons') {
+    let weaponsType = updatedHero.weapons[type]
+    weaponsType.map((weapon, index) => {
+      if (weapon.id === itemId) {
+        if (updatedHero.coins - findItem(group, itemId).price >= 0) {
+          updatedHero.weapons[type][index].count += 1
+          updatedHero.coins -= findItem(group, itemId).price
+        } else {
+          setHasNotEnoughCoins(true)
+        }
+      }
+      return true
+    })
+  } else if (group === 'protection') {
+    let protectionType = updatedHero.protection[type]
+    protectionType.map(protection => {
+      if (protection.id === itemId) {
+        if (updatedHero.coins - findItem(group, itemId).price >= 0) {
+          protection.selected = true
+          updatedHero.coins -= findItem(group, itemId).price
+        }
+      } else {
+        setHasNotEnoughCoins(true)
+      }
+      return protection
+    })
+  }
+  return updatedHero
+}

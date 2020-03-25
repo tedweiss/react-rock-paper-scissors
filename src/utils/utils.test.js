@@ -1,10 +1,13 @@
 import {
+  buyItem,
   compare,
   findEnemysChoice,
-  updateRewards,
-  findRewards,
+  findEnemysItem,
   findHeroWeapons,
-  findEnemysItem
+  findItem,
+  findRewards,
+  updateRewards,
+  findHerosItem
 } from './utils'
 import { hero } from './hero'
 import { items } from './items'
@@ -292,5 +295,161 @@ describe('findEnemysItem', () => {
     it('returns the item in the array', () => {
       expect(findEnemysItem(0.1, oneItem)).toEqual('wr1')
     })
+  })
+})
+
+describe('findItem', () => {
+  it('should return the item for which group and id is passed in', () => {
+    const foundItem = findItem('weapons', 'wr2')
+    const expectedItem = {
+      id: 'wr2',
+      name: 'Pebble',
+      power: 2,
+      price: 2,
+      size: 'sm',
+      type: 'rocks'
+    }
+    expect(foundItem).toEqual(expectedItem)
+  })
+})
+
+describe('buyItem', () => {
+  it('should return the count increase by 1', () => {
+    const mockSetHasNotEnoughCoins = jest.fn()
+    const updatedHero = buyItem(
+      'weapons',
+      hero,
+      'wr2',
+      mockSetHasNotEnoughCoins,
+      'rocks'
+    )
+    expect(updatedHero.weapons.rocks[1].count).toEqual(1)
+  })
+  it('should return the coins decreased by the price of the weapon item', () => {
+    const mockSetHasNotEnoughCoins = jest.fn()
+    const updatedHero = buyItem(
+      'weapons',
+      { ...hero, coins: 5 },
+      'wr2',
+      mockSetHasNotEnoughCoins,
+      'rocks'
+    )
+    expect(updatedHero.coins).toEqual(3)
+  })
+  it('should call setHasNotEnoughCoins when there is not enough coins when a weapon is selected', () => {
+    const mockSetHasNotEnoughCoins = jest.fn()
+    buyItem(
+      'weapons',
+      { ...hero, coins: 1 },
+      'wr2',
+      mockSetHasNotEnoughCoins,
+      'rocks'
+    )
+    expect(mockSetHasNotEnoughCoins).toHaveBeenCalled()
+  })
+  it('should return the protection type marked as selected', () => {
+    const mockSetHasNotEnoughCoins = jest.fn()
+    const updatedHero = buyItem(
+      'protection',
+      hero,
+      'ps1',
+      mockSetHasNotEnoughCoins,
+      'shields'
+    )
+    expect(updatedHero.protection.shields[0].selected).toEqual(true)
+  })
+  it('should return the coins decreased by the price of the protection item', () => {
+    const mockSetHasNotEnoughCoins = jest.fn()
+    const updatedHero = buyItem(
+      'protection',
+      { ...hero, coins: 5 },
+      'ps1',
+      mockSetHasNotEnoughCoins,
+      'shields'
+    )
+    expect(updatedHero.coins).toEqual(4)
+  })
+  it('should call setHasNotEnoughCoins when there is not enough coins when a protection is selected', () => {
+    const mockSetHasNotEnoughCoins = jest.fn()
+    buyItem(
+      'weapons',
+      { ...hero, coins: 1 },
+      'wr2',
+      mockSetHasNotEnoughCoins,
+      'rocks'
+    )
+    expect(mockSetHasNotEnoughCoins).toHaveBeenCalled()
+  })
+})
+
+describe('findHerosItem', () => {
+  const testHero = {
+    id: 'h1',
+    name: 'Hero',
+    weapons: {
+      rocks: [
+        { id: 'wr1', available: true, count: 999 },
+        { id: 'wr2', available: true, count: 5 },
+        { id: 'wr3', available: false, count: 0 },
+        { id: 'wr4', available: false, count: 0 },
+        { id: 'wr5', available: false, count: 0 }
+      ],
+      paper: [
+        { id: 'wp1', available: true, count: 999 },
+        { id: 'wp2', available: false, count: 0 },
+        { id: 'wp3', available: false, count: 0 },
+        { id: 'wp4', available: false, count: 0 },
+        { id: 'wp5', available: false, count: 0 }
+      ],
+      scissors: [
+        { id: 'ws1', available: true, count: 999 },
+        { id: 'ws2', available: false, count: 0 },
+        { id: 'ws3', available: false, count: 0 },
+        { id: 'ws4', available: false, count: 0 },
+        { id: 'ws5', available: false, count: 0 }
+      ]
+    },
+    protection: {
+      shields: [
+        { id: 'ps1', available: true, selected: false },
+        { id: 'ps2', available: false, selected: false },
+        { id: 'ps3', available: false, selected: false },
+        { id: 'ps4', available: false, selected: false },
+        { id: 'ps5', available: false, selected: false }
+      ],
+      helmets: [
+        { id: 'ph1', available: false, selected: false },
+        { id: 'ph2', available: false, selected: false },
+        { id: 'ph3', available: false, selected: false },
+        { id: 'ph4', available: false, selected: false },
+        { id: 'ph5', available: false, selected: false }
+      ],
+      armour: [
+        { id: 'pa1', available: false, selected: false },
+        { id: 'pa2', available: false, selected: false },
+        { id: 'pa3', available: false, selected: false },
+        { id: 'pa4', available: false, selected: false },
+        { id: 'pa5', available: false, selected: false }
+      ]
+    },
+    health: 5,
+    coins: 0
+  }
+
+  it('should return a weapon when weapon info is passed in', () => {
+    const group = 'weapons'
+    const type = 'rocks'
+    const itemId = 'wr2'
+    const returnedItem = { id: 'wr2', available: true, count: 5 }
+    const heroItem = findHerosItem(group, testHero, itemId, type)
+    expect(heroItem).toEqual(returnedItem)
+  })
+  it('should return a protection item when protection info is passed in', () => {
+    const group = 'protection'
+    const type = 'shields'
+    const itemId = 'ps1'
+    const returnedItem = { id: 'ps1', available: true, selected: false }
+    const heroItem = findHerosItem(group, testHero, itemId, type)
+    expect(heroItem).toEqual(returnedItem)
   })
 })

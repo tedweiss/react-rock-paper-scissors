@@ -21,7 +21,7 @@ const Welcome = () => {
         <div>
           Welcome Hero
           <button onClick={() => handleClick('enemies-display')}>
-            EnemiesDisplay
+            Begin Your Journey
           </button>
         </div>
       )}

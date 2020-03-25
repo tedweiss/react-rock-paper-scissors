@@ -39,7 +39,8 @@ const EnemiesDisplay = () => {
   })
 
   return (
-    <>
+    <div>
+      Choose your opponent.
       {enemies.map(enemy => {
         if (enemy.available) {
           return (
@@ -59,7 +60,7 @@ const EnemiesDisplay = () => {
           Marketplace
         </StyledMarketplaceButton>
       )}
-    </>
+    </div>
   )
 }
 

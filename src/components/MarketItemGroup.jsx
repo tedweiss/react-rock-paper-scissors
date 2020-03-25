@@ -18,7 +18,14 @@ const MarketItemGroup = ({ group, type }) => {
       {heroGroup[type].map((item, index) => {
         if (item.available) {
           if (group !== 'weapons' || (group === 'weapons' && index !== 0)) {
-            return <MarketItem group={group} itemId={item.id} key={item.id} />
+            return (
+              <MarketItem
+                group={group}
+                itemId={item.id}
+                key={item.id}
+                type={type}
+              />
+            )
           }
         }
         return true
