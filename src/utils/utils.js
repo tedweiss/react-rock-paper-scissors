@@ -274,3 +274,14 @@ export const buyItem = (group, hero, itemId, setHasNotEnoughCoins, type) => {
   }
   return updatedHero
 }
+
+export const subrtractItemCount = (group, hero, itemId, type) => {
+  let updatedHero = hero
+  updatedHero[group][type].map(item => {
+    if (item.id === itemId) {
+      item.count -= 1
+    }
+    return true
+  })
+  return updatedHero
+}

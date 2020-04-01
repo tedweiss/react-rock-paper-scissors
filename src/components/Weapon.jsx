@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useHeroState, useHeroDispatch } from '../providers/HeroProvider'
+import { findHerosItem, subrtractItemCount } from '../utils/utils'
 
 const StyledWeapon = styled.button`
   padding: 15px 10px;
@@ -16,14 +18,28 @@ const StyledWeapon = styled.button`
   cursor: pointer;
 `
 const Weapon = ({ displayResult, weapon }) => {
+  const { hero } = useHeroState()
+  const dispatch = useHeroDispatch()
+  const heroItem = findHerosItem('weapons', hero, weapon.id, weapon.type)
+
   return (
-    <StyledWeapon
-      onClick={() => {
-        displayResult(weapon.id)
-      }}
-    >
-      {weapon.name}
-    </StyledWeapon>
+    <div>
+      <StyledWeapon
+        onClick={() => {
+          displayResult(weapon.id)
+          const updatedHero = subrtractItemCount(
+            'weapons',
+            hero,
+            weapon.id,
+            weapon.type
+          )
+          dispatch({ type: 'update', updatedHero })
+        }}
+      >
+        {weapon.name}
+      </StyledWeapon>
+      <div>Count: {heroItem.count}</div>
+    </div>
   )
 }
 
